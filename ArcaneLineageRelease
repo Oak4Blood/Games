@@ -1,0 +1,535 @@
+
+local colors = {
+    SchemeColor = Color3.fromRGB(100,233,255),
+    Background = Color3.fromRGB(0, 0, 0),
+    Header = Color3.fromRGB(0, 0, 0),
+    TextColor = Color3.fromRGB(255,255,255),
+    ElementColor = Color3.fromRGB(20, 20, 20)
+}
+
+local theme = ("Serpent")
+
+--[[Select Themes
+Themes:
+    LightTheme
+    DarkTheme
+    GrapeTheme
+    BloodTheme
+    Ocean
+    Midnight
+    Sentinel
+    Synapse
+    Serpent
+    ]]--
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Crimson Project 2", theme)
+
+local Tab = Window:NewTab("Items Menu")
+local Section = Tab:NewSection("Farm Menu")
+
+Section:NewToggle("Farm Materials", "Get Everything in map", function(state)
+
+    if state then
+        FarmMat = state
+while FarmMat == true do
+wait(1)
+for i,v in pairs(game.Workspace.SpawnedItems:GetDescendants()) do
+if v:IsA('ClickDetector') then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+fireclickdetector(v,1)
+
+end
+end
+end
+    else
+       FarmMat = state
+
+end
+end)
+
+Section:NewToggle("Auto Drink no mobs", "", function(state)
+
+    if state then
+        Drink = state
+while Drink == true do
+    wait()
+    local args = {
+        [1] = "Equip",
+        [2] = "Abhorrent Elixir"
+    }
+    
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Information"):WaitForChild("InventoryManage"):FireServer(unpack(args))
+
+    local args = {
+        [1] = "Use",
+        [2] = "Abhorrent Elixir"
+    }
+    
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Information"):WaitForChild("InventoryManage"):FireServer(unpack(args))
+
+wait(58)
+end
+    else
+       Drink = state
+
+end
+end)
+
+Items = {
+    "Everthistle",
+    "Carnastool", 
+    "Driproot", 
+    "Hightail", 
+    "Cryastem",
+    "Crylight"
+}
+
+local farmitem = Section:NewDropdown("Select Items To Farm", "Click To Select", Items, function(ptz)
+    itemdrops = ptz
+ end)
+
+ 
+Section:NewToggle("Farm Select Material", "Get Selected items in map", function(state)
+
+    if state then
+        FarmMatSec = state
+while FarmMatSec == true do
+wait(1)
+for i,v in pairs(game.Workspace.SpawnedItems:GetDescendants()) do
+if v.Name == itemdrops then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
+fireclickdetector(v.Handle.ClickPart.ClickDetector,1)
+
+end
+end
+end
+    else
+        FarmMatSec = state
+
+end
+end)
+
+local item = Section:NewDropdown("Select Items To Drop", "Click To Select", Items, function(ptx)
+   itemdrop = ptx
+end)
+
+
+Section:NewToggle("Auto Drop items", "", function(state)
+
+    if state then
+        AutoDrop = state
+while AutoDrop == true do
+wait()
+    local args = {
+        [1] = "Equip",
+        [2] = itemdrop
+    }
+    
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Information"):WaitForChild("InventoryManage"):FireServer(unpack(args))
+    local args = {
+        [1] = "Drop",
+        [2] = itemdrop
+    }
+
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Information"):WaitForChild("InventoryManage"):FireServer(unpack(args))
+    
+end
+    else
+        AutoDrop = state
+
+end
+end)
+
+
+local Tab = Window:NewTab("Game")
+
+local Section = Tab:NewSection("Auto Farm")
+Section:NewToggle("Auto Strike Not Done", "", function(state)
+
+    if state then
+        AutoStrike = state
+while AutoStrike == true do
+wait(1)
+local incombat = game.Players.LocalPlayer.Character
+for i,v in pairs(incombat:GetChildren()) do
+    if v.Name == "FightInProgress" then
+        local FightIDs = v.Value
+
+        local A_1 = FightIDs
+        local Event = game:GetService("ReplicatedStorage").Remotes.Data.GetOtherTeam
+        Event:InvokeServer(A_1)
+        
+        local A_1 = "Attack"
+        local A_2 = "Strike"
+        local A_3 = 
+        {
+            ["Attacking"] = game:GetService("Workspace").Living.Slime
+        }
+        local Event = game.Players.LocalPlayer.PlayerGui.Combat.CombatHandle.RemoteFunction
+        Event:InvokeServer(A_1, A_2, A_3)
+
+        local A_1 = FightIDs
+        local Event = game:GetService("ReplicatedStorage").Remotes.Data.GetOtherTeam
+        Event:InvokeServer(A_1)
+        
+        local A_1 = "Attack"
+        local A_2 = "Strike"
+        local A_3 = 
+        {
+            ["Attacking"] = game:GetService("Workspace").Living.Thief
+        }
+        local Event = game.Players.LocalPlayer.PlayerGui.Combat.CombatHandle.RemoteFunction
+        Event:InvokeServer(A_1, A_2, A_3)
+                
+        local A_1 = FightIDs
+        local Event = game:GetService("ReplicatedStorage").Remotes.Data.GetOtherTeam
+        Event:InvokeServer(A_1)
+        
+        local A_1 = "Attack"
+        local A_2 = "Strike"
+        local A_3 = 
+        {
+            ["Attacking"] = game:GetService("Workspace").Living["Zombie Mushroom"]
+        }
+        local Event = game.Players.LocalPlayer.PlayerGui.Combat.CombatHandle.RemoteFunction
+        Event:InvokeServer(A_1, A_2, A_3)
+                        
+        local A_1 = FightIDs
+        local Event = game:GetService("ReplicatedStorage").Remotes.Data.GetOtherTeam
+        Event:InvokeServer(A_1)
+        
+        local A_1 = "Attack"
+        local A_2 = "Strike"
+        local A_3 = 
+        {
+            ["Attacking"] = game:GetService("Workspace").Living["Grass Spirit"]
+        }
+        local Event = game.Players.LocalPlayer.PlayerGui.Combat.CombatHandle.RemoteFunction
+        Event:InvokeServer(A_1, A_2, A_3)
+
+
+    end
+end
+end
+    else
+        AutoStrike = state
+
+end
+end)
+
+local Section = Tab:NewSection("Auto Mini Games")
+Section:NewToggle("Auto Dodge", "", function(state)
+
+    if state then
+        AutoDodge = state
+while AutoDodge == true do
+wait()
+local incombat = game.Players.LocalPlayer.Character
+for i,v in pairs(incombat:GetChildren()) do
+    if v.Name == "FightInProgress" then
+
+    local args = {
+        [1] = {
+            [1] = true,
+            [2] = true
+        },
+        [2] = "DodgeMinigame"
+    }
+    
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Information"):WaitForChild("RemoteFunction"):FireServer(unpack(args))
+end
+end
+end
+    else
+        AutoDodge = state
+
+end
+end)
+
+Section:NewToggle("Auto Block", "", function(state)
+
+    if state then
+        AutoBlock = state
+while AutoBlock == true do
+wait()
+local incombat = game.Players.LocalPlayer.Character
+for i,v in pairs(incombat:GetChildren()) do
+    if v.Name == "FightInProgress" then
+
+    local args = {
+        [1] = {
+            [1] = true,
+            [2] = false
+        },
+        [2] = "DodgeMinigame"
+    }
+    
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Information"):WaitForChild("RemoteFunction"):FireServer(unpack(args))
+end
+end
+end
+    else
+        AutoBlock = state
+
+end
+end)
+
+local Section = Tab:NewSection("Auto Spear")
+Section:NewToggle("Auto Spear", "", function(state)
+
+    if state then
+        AutoSpear = state
+while AutoSpear == true do
+wait()
+local incombat = game.Players.LocalPlayer.Character
+for i,v in pairs(incombat:GetChildren()) do
+    if v.Name == "FightInProgress" then
+
+
+local A_1 = true
+local A_2 = "SpearQTE"
+local Event = game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction
+Event:FireServer(A_1, A_2)
+end
+end
+end
+    else
+        AutoSpear = state
+
+end
+end)
+
+local Section = Tab:NewSection("Auto Sword")
+Section:NewToggle("Auto Sword", "", function(state)
+
+    if state then
+        AutoSword = state
+while AutoSword == true do
+wait()
+local incombat = game.Players.LocalPlayer.Character
+for i,v in pairs(incombat:GetChildren()) do
+    if v.Name == "FightInProgress" then
+
+
+local A_1 = true
+local A_2 = "SwordQTE"
+local Event = game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction
+Event:FireServer(A_1, A_2)
+end
+end
+end
+    else
+        AutoSword = state
+
+end
+end)
+
+local Section = Tab:NewSection("Auto Magic")
+Section:NewToggle("Auto Magic", "", function(state)
+
+    if state then
+        AutoMagic = state
+while AutoMagic == true do
+wait()
+local incombat = game.Players.LocalPlayer.Character
+for i,v in pairs(incombat:GetChildren()) do
+    if v.Name == "FightInProgress" then
+
+
+local A_1 = true
+local A_2 = "MagicQTE"
+local Event = game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction
+Event:FireServer(A_1, A_2)
+end
+end
+end
+    else
+        AutoMagic = state
+
+end
+end)
+
+local Section = Tab:NewSection("Auto Fist")
+Section:NewToggle("Auto Fist", "", function(state)
+
+    if state then
+        AutoFist = state
+while AutoFist == true do
+wait()
+local incombat = game.Players.LocalPlayer.Character
+for i,v in pairs(incombat:GetChildren()) do
+    if v.Name == "FightInProgress" then
+
+local A_1 = true
+local A_2 = "FistQTE"
+local Event = game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction
+Event:FireServer(A_1, A_2)
+end
+end
+end
+    else
+        AutoFist = state
+
+end
+end)
+
+local Section = Tab:NewSection("Auto Dagger")
+Section:NewToggle("Auto Dagger", "", function(state)
+
+    if state then
+        AutoDagger = state
+while AutoDagger == true do
+wait()
+local incombat = game.Players.LocalPlayer.Character
+for i,v in pairs(incombat:GetChildren()) do
+    if v.Name == "FightInProgress" then
+ 
+local A_1 = true
+local A_2 = "DaggerQTE"
+local Event = game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction
+Event:FireServer(A_1, A_2)
+end
+end
+end
+    else
+        AutoDagger = state
+
+end
+end)
+
+local Tab = Window:NewTab("Location")
+local Section = Tab:NewSection("Teleport")
+Section:NewButton("Caldera City", "", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-508.186676, 49.2697639, -3367.58032, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+end)
+
+Section:NewButton("The Old Ruins", "", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2397.68701, 45.2747307, -2978.37549, -1.1920929e-07, 0, 1.00000012, 0, 1, 0, -1.00000012, 0, -1.1920929e-07)
+end)
+
+Section:NewButton("Westwood Heart", "", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2327.72437, 105.34288, -2732.94165, -0.987686276, 0, -0.156449571, 0, 1, 0, 0.156449571, 0, -0.987686276)
+end)
+
+local Tab = Window:NewTab("Puzzle")
+local Section = Tab:NewSection("Cursed")
+Section:NewButton("Check", "", function()
+    for i,v in pairs(game.Workspace:GetDescendants()) do
+        if v.ClassName == "SurfaceGui" then
+            v:GetChildren(print.v.Image)
+        end
+    end
+end)
+
+
+local Tab = Window:NewTab("Players")
+local Section = Tab:NewSection("Players Teleport")
+Plrt = {}
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(Plrt,v.Name) 
+end
+local drop2 = Section:NewDropdown("Select Player", "Click To Select", Plrt, function(pt)
+   plyt = pt
+end)
+
+Section:NewButton("Refresh Players","Refresh Dropdown", function()
+  drop2:Refresh(Plrt)
+end)
+
+Section:NewButton("Teleport to select player", "", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[plyt].Character.HumanoidRootPart.CFrame
+end)
+
+Section:NewButton("Go and Back", "", function()
+    
+local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+local pos = p1.CFrame
+
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[plyt].Character.HumanoidRootPart.CFrame
+
+wait(1)
+
+p1.CFrame = pos
+
+end)
+
+local Section = Tab:NewSection("God Eyes")
+Section:NewButton("Unlimid Username Distance", "All Seeing Eye", function()
+    
+	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+	game.Players.LocalPlayer.Character.Humanoid.NameDisplayDistance = 100000000000
+
+	end
+end)
+
+local Section = Tab:NewSection("Misc")
+
+Section:NewButton("Infinite Jump", "Free Jump", function()
+local InfiniteJumpEnabled = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+	if InfiniteJumpEnabled then
+		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+	end
+end)
+end)
+
+Section:NewSlider("Walk Speed", "Speed Cheat", 100, 1, function(speed)
+    local ply = game.Players.LocalPlayer.Character.Name
+    local pws = workspace.Living[ply].Effects.RunBuff
+    pws.Value = speed
+end)
+
+Section:NewSlider("Jump Power", "Jump Cheat", 250, 16, function(jump)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = jump
+end)
+
+Section:NewSlider("Hip Height", "Jump Cheat", 1000, 0, function(hip)
+    game.Players.LocalPlayer.Character.Humanoid.HipHeight = hip
+end)
+
+Section:NewButton("Rejoin", "Rejoin Server", function()
+
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local Rejoin = coroutine.create(function()
+    local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end)
+
+    if ErrorMessage and not Success then
+        warn(ErrorMessage)
+    end
+end)
+
+coroutine.resume(Rejoin)  
+
+end)
+
+Section:NewButton("Hop Server", "Hop to low server", function()
+
+    wait ()
+local Servers = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/3237168/servers/Public?sortOrder=Asc&limit=100"))
+for i,v in pairs(Servers.data) do
+  if v.playing ~= v.maxPlayers then
+      game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
+  end
+end
+end)
+
+Section:NewButton("Alt Del", "Delete!!!!", function()
+local Plr = game:GetService("Players").LocalPlayer
+local Mouse = Plr:GetMouse()
+
+Mouse.Button1Down:connect(function()
+if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftAlt) then return end
+if not Mouse.Target then return end
+Mouse.Target:Destroy()
+end)
+end)
+
+Section:NewKeybind(" ", " ", Enum.KeyCode.RightControl, function()
+	Library:ToggleUI()
+end)
